@@ -1,0 +1,24 @@
+syntax = "proto3";
+package router;
+
+service Router {
+	rpc Send (Request) returns (Reply) {}
+}
+
+enum Method {
+	SendMsg = 0;
+	JoinTag = 1;
+}
+
+message Request {
+	Method   method    		   = 1;
+	repeated string  clientIDs = 2;
+	bytes    payload   		   = 3;
+	string   version   		   = 4;
+}
+
+message Reply {
+	uint32  code  = 1;
+	string  msg   = 2;
+	string  data  = 3;
+}
